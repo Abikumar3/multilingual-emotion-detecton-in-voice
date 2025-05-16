@@ -1,0 +1,78 @@
+
+
+
+---
+
+### 🔧 **Main Purpose**
+
+To transcribe speech from an audio/video file, detect the spoken language, and recognize the speaker's **emotion** using audio features. It uses OpenAI's **Whisper** model and a basic machine learning pipeline.
+
+---
+
+### 📦 **Setup**
+
+* Installs necessary libraries:
+
+  ```python
+  pip install openai-whisper librosa scikit-learn
+  ```
+
+---
+
+### 🧠 **Core Components**
+
+#### 1. **Speech Transcription (Whisper)**
+
+* Loads the Whisper model:
+
+  ```python
+  model = whisper.load_model("base")
+  ```
+* Transcribes speech from audio:
+
+  ```python
+  result = model.transcribe(audio_path)
+  ```
+
+#### 2. **Audio Feature Extraction**
+
+* Extracts:
+
+  * **MFCCs** (Mel-frequency cepstral coefficients)
+  * **Pitch**
+* Combines them into a 26-feature vector.
+
+#### 3. **Emotion Classification**
+
+* A simple **SVM (Support Vector Machine)** classifier is trained on randomly generated dummy data.
+* Labels: `['happy', 'sad', 'angry', 'neutral']`
+
+#### 4. **Audio Conversion**
+
+* Converts `.mp4` to `.wav` using `moviepy`.
+
+#### 5. **End-to-End Pipeline**
+
+A function `emotion_aware_speech_recognition(mp4_path)`:
+
+* Converts video to audio.
+* Transcribes speech.
+* Extracts features.
+* Predicts emotion.
+* Prints:
+
+  * Transcription
+  * Detected language
+  * Detected emotion
+
+---
+
+### 📌 **Example**
+
+```python
+audio_path = "/content/happy voice.mp4"
+emotion_aware_speech_recognition(audio_path)
+```
+
+---
+
